@@ -60,7 +60,7 @@ app.delete("/book/:id",(req,resp)=>{
      const id =parseInt(req.params.id);
     console.log(id)
     if(isNaN(id)){
-     return resp.status(400).json({error:"Bad Request id must be a number !!"})
+     return resp.status(401).json({error:"Bad Request id must be a number !!"})
     }
 
     const bookIndex=books.findIndex((e)=>e.id===id);
@@ -70,7 +70,7 @@ app.delete("/book/:id",(req,resp)=>{
     books.splice(bookIndex,1);
     console.log(books);
     
-    return resp.status(201).json({"Message":"Book Deleted...."});
+    return resp.status(202).json({"Message":"Book Deleted...."});
 
 })
 
