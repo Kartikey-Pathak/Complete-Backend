@@ -1,10 +1,24 @@
 const express = require("express");
+const fs=require("fs");
 const app = express();
 const PORT = 8000;
 
 
 //Middlewear Plugins
 app.use(express.json());
+
+//First Middlewear
+app.use((req,resp,next)=>{
+    console.log("I am a middlewear...");
+    // next();  //allow next methods(routes) or middlewears to run.
+
+    // return resp.json({"message":"Middlewear Runned..."})  //this is early return
+
+    const log=`\n [${Date.now()}] ${req.method} ${req.path} `;
+    fs.appendFileSync("logs.txt",log,"utf-8");
+    
+    next();
+})
 
 
 //Memory DB
