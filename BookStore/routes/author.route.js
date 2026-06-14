@@ -13,4 +13,8 @@ authorrouter.get("/",controller.getallauthors)
 //POST Route...
 authorrouter.post("/",controller.createauthor)
 
+
+authorrouter.get("/:id",controller.getbooksbyid);   //Get all books associated with this authors id
+
+
 module.exports=authorrouter;
