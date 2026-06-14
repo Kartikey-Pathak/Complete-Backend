@@ -1,6 +1,7 @@
 require("dotenv/config");
 const express = require("express");
-const router = require("./routes/book.route");
+const bookrouter = require("./routes/book.route");
+const authorrouter=require("./routes/author.route");
 const { loggermiddleware } = require("./Middlewares/logger");
 const app = express();
 const PORT = 8000;
@@ -20,6 +21,7 @@ app.use(loggermiddleware);
 
 
 //Routes.....
-app.use('/book',router);
+app.use('/book',bookrouter);
+app.use('/author',authorrouter);
 
 app.listen(PORT);

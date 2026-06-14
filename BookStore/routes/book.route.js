@@ -1,23 +1,22 @@
 const express=require("express");
-const { BOOKS } = require("../models/book");
 const controller = require("../controllers/book.controller");
 
-const router=express.Router();
+const bookrouter=express.Router();
 
 
 
 //all Routes...
 
-router.get("/",controller.getallbooks)
+bookrouter.get("/",controller.getallbooks)
 
 //dynamic
-router.get("/:id",controller.getallbooksbyid);
+bookrouter.get("/:id",controller.getallbooksbyid);
 
 
 //POST Route...
-router.post("/",controller.savebooks)
+bookrouter.post("/",controller.savebooks)
 
 //DELETE ROUTE
-router.delete("/:id",controller.deletebookbyid)
+bookrouter.delete("/:id",controller.deletebookbyid)
 
-module.exports=router;
+module.exports=bookrouter;
