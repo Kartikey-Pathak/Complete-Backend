@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Kartikey-Pathak/Complete-Backend/issues"
   },
-  "homepage": "https://github.com/Kartikey-Pathak/Complete-Backend#readme"
+  "homepage": "https://github.com/Kartikey-Pathak/Complete-Backend#readme",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.3"
+  }
 }

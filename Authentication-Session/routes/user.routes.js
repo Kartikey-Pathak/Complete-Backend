@@ -3,7 +3,7 @@ import db from "../db/index.js";
 import { usersTable, userSession } from "../db/schema.js"
 import { eq } from "drizzle-orm";
 import { createHmac, randomBytes } from "node:crypto"
-
+import jwt from "jsonwebtoken";
 
 const userRouter = express.Router();
 
@@ -58,7 +58,7 @@ userRouter.post("/signup", async (req, resp) => {
 userRouter.post("/login", async (req, resp) => {
     const { email, password } = req.body;
 
-    const [exists] = await db.select({ id: usersTable.id, email: usersTable.email, password: usersTable.password, salt: usersTable.salt }).from(usersTable).where((table) => eq(table.email, email));
+    const [exists] = await db.select({ id: usersTable.id, email: usersTable.email, password: usersTable.password, salt: usersTable.salt ,name:usersTable.name}).from(usersTable).where((table) => eq(table.email, email));
 
     console.log(exists);
 
@@ -76,11 +76,18 @@ userRouter.post("/login", async (req, resp) => {
     }
 
 
-    const [session] = await db.insert(userSession).values({
-        userId: exists.id
-    }).returning({ id: userSession.id })
+    // const [session] = await db.insert(userSession).values({
+    //     userId: exists.id
+    // }).returning({ id: userSession.id })
 
-    return resp.json({ Message: "Session Generated....", Sessionid: session.id })
+    const payload={
+        id:exists.id,
+        email:exists.email,
+        name:exists.name
+    }
+    const token=jwt.sign(payload,process.env.JWT_SECRET)
+
+    return resp.json({ Message: "Session Generated....", token })
 });
 
 
