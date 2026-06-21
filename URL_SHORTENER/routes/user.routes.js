@@ -14,7 +14,7 @@ router.post("/signup", async (req, resp) => {
         return resp.status(400).json({ error: validation.error.format() });
     }
 
-    const { firstname, lastname, email, password } = validation;
+    const { name, email, password } = validation;
 
 
     const [exist] = await db.select({
@@ -29,8 +29,7 @@ router.post("/signup", async (req, resp) => {
     const hashpassword = createHmac("sha256", salt).update(password).digest('hex');
 
     const [user] = await db.insert(usersTable).values({
-        firstname,
-        lastname,
+        name,
         email,
         password: hashpassword,
         salt
