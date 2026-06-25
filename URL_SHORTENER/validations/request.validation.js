@@ -1,4 +1,4 @@
-import {z} from "zod";
+import {string, z} from "zod";
 
 export const signupPostRequestSchema=z.object({
     name:string(),

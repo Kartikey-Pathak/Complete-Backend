@@ -19,7 +19,7 @@ router.post("/signup", async (req, resp) => {
         return resp.status(400).json({ error: validation.error.format() });
     }
 
-    const { name, email, password } = validation;
+    const { name, email, password } = validation.data;
 
 
    const exist=await getUserByEmail(email);
@@ -33,7 +33,7 @@ router.post("/signup", async (req, resp) => {
     
    const user=await createUser(name,email,hashpassword,salt);
 
-    return resp.status(201), json({ message: "user saved" }, user);
+    return resp.status(201).json({ message: "user saved" ,user});
 })
 
 //login route...
